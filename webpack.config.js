@@ -1,5 +1,4 @@
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const path = require("path")
 
 const config = {
@@ -20,13 +19,7 @@ const config = {
         }
       }
     }]
-  }, plugins: [new SWPrecacheWebpackPlugin({
-    cacheId: "my-domain-cache-id",
-    dontCacheBustUrlsMatching: /\.\w{8}\./,
-    filename: "service-worker.js",
-    minify: true,
-    staticFileGlobsIgnorePatterns: [/\.map$/, /manifest\.json$/]
-  }),
+  }, plugins: [
   new WebpackPwaManifest({
     name: 'Budget App',
     short_name: 'Budget',
