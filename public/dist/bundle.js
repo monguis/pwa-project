@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/expenseChart.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/app.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1516,6 +1516,18 @@ eval("/* WEBPACK VAR INJECTION */(function(module) {var require;//! moment.js\n\
 
 /***/ }),
 
+/***/ "./node_modules/serviceworker-webpack-plugin/lib/runtime.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/serviceworker-webpack-plugin/lib/runtime.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\n/* eslint-disable flowtype/require-valid-file-annotation */\n\nthrow new Error(\"serviceworker-webpack-plugin: It seems that your are importing\\n  \\\"serviceworker-webpack-plugin/lib/runtime\\\" without using the plugin.\\n  Makes sure that your webpack configuration is correct.\");\n\n//# sourceURL=webpack:///./node_modules/serviceworker-webpack-plugin/lib/runtime.js?");
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/module.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
@@ -1527,27 +1539,51 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 
 /***/ }),
 
+/***/ "./src/app.js":
+/*!********************!*\
+  !*** ./src/app.js ***!
+  \********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _calculations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calculations */ \"./src/calculations.js\");\n/* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elements */ \"./src/elements.js\");\n/* harmony import */ var _expenseChart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./expenseChart */ \"./src/expenseChart.js\");\n/* harmony import */ var serviceworker_webpack_plugin_lib_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! serviceworker-webpack-plugin/lib/runtime */ \"./node_modules/serviceworker-webpack-plugin/lib/runtime.js\");\n/* harmony import */ var serviceworker_webpack_plugin_lib_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(serviceworker_webpack_plugin_lib_runtime__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\nif ('serviceWorker' in navigator) {\n  var registration = serviceworker_webpack_plugin_lib_runtime__WEBPACK_IMPORTED_MODULE_3___default.a.register();\n}\n\nfunction addToList(name, price) {\n  _elements__WEBPACK_IMPORTED_MODULE_1__[\"expensesListEl\"].innerHTML += \"<li class=\\\"list-group-item\\\">Name: \".concat(name, \"\\n    <span class=\\\"ml-4\\\">Price: \").concat(price, \"</span></li>\");\n}\n\nfunction submit(e) {\n  e.preventDefault();\n  var total = Object(_calculations__WEBPACK_IMPORTED_MODULE_0__[\"subtract\"])(Number(_elements__WEBPACK_IMPORTED_MODULE_1__[\"balanceEl\"].innerText), _elements__WEBPACK_IMPORTED_MODULE_1__[\"priceEl\"].value);\n  _elements__WEBPACK_IMPORTED_MODULE_1__[\"balanceEl\"].innerText = total;\n  addToList(_elements__WEBPACK_IMPORTED_MODULE_1__[\"expenseEl\"].value, _elements__WEBPACK_IMPORTED_MODULE_1__[\"priceEl\"].value);\n  Object(_expenseChart__WEBPACK_IMPORTED_MODULE_2__[\"updateChart\"])(_elements__WEBPACK_IMPORTED_MODULE_1__[\"expensesChart\"], _elements__WEBPACK_IMPORTED_MODULE_1__[\"expenseEl\"].value, _elements__WEBPACK_IMPORTED_MODULE_1__[\"priceEl\"].value);\n}\n\nfunction reset(e) {\n  e.preventDefault();\n  var total = 2000;\n  _elements__WEBPACK_IMPORTED_MODULE_1__[\"balanceEl\"].innerText = total;\n  _elements__WEBPACK_IMPORTED_MODULE_1__[\"expensesListEl\"].innerHTML = \"\";\n  Object(_expenseChart__WEBPACK_IMPORTED_MODULE_2__[\"resetChart\"])(_elements__WEBPACK_IMPORTED_MODULE_1__[\"expensesChart\"]);\n}\n\n_elements__WEBPACK_IMPORTED_MODULE_1__[\"submitBtn\"].onclick = submit;\n_elements__WEBPACK_IMPORTED_MODULE_1__[\"resetBtn\"].onclick = reset;\n\n//# sourceURL=webpack:///./src/app.js?");
+
+/***/ }),
+
+/***/ "./src/calculations.js":
+/*!*****************************!*\
+  !*** ./src/calculations.js ***!
+  \*****************************/
+/*! exports provided: subtract */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"subtract\", function() { return subtract; });\nfunction subtract(a, b) {\n  var result = a - b;\n  return result;\n}\n\n//# sourceURL=webpack:///./src/calculations.js?");
+
+/***/ }),
+
+/***/ "./src/elements.js":
+/*!*************************!*\
+  !*** ./src/elements.js ***!
+  \*************************/
+/*! exports provided: priceEl, balanceEl, expenseEl, expensesListEl, submitBtn, resetBtn, expensesChart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"priceEl\", function() { return priceEl; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"balanceEl\", function() { return balanceEl; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"expenseEl\", function() { return expenseEl; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"expensesListEl\", function() { return expensesListEl; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"submitBtn\", function() { return submitBtn; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"resetBtn\", function() { return resetBtn; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"expensesChart\", function() { return expensesChart; });\nvar Chart = __webpack_require__(/*! chart.js */ \"./node_modules/chart.js/dist/Chart.js\");\n\nvar priceEl = document.getElementById(\"price\");\nvar balanceEl = document.getElementById(\"balance\");\nvar expenseEl = document.getElementById(\"expense\");\nvar expensesListEl = document.getElementById(\"expenses-list\");\nvar submitBtn = document.getElementById(\"submit\");\nvar resetBtn = document.getElementById(\"reset\");\nvar ctx = document.getElementById(\"myChart\").getContext(\"2d\");\nvar expensesChart = new Chart(ctx, {\n  type: \"bar\",\n  data: {\n    labels: [],\n    datasets: [{\n      label: \"Expense cost in $\",\n      data: [],\n      backgroundColor: [\"rgba(255, 99, 132, 0.2)\", \"rgba(54, 162, 235, 0.2)\", \"rgba(255, 206, 86, 0.2)\", \"rgba(75, 192, 192, 0.2)\", \"rgba(153, 102, 255, 0.2)\", \"rgba(255, 159, 64, 0.2)\"],\n      borderColor: [\"rgba(255, 99, 132, 1)\", \"rgba(54, 162, 235, 1)\", \"rgba(255, 206, 86, 1)\", \"rgba(75, 192, 192, 1)\", \"rgba(153, 102, 255, 1)\", \"rgba(255, 159, 64, 1)\"],\n      borderWidth: 1\n    }]\n  },\n  options: {\n    title: {\n      text: \"Expenses Chart\"\n    },\n    scales: {\n      yAxes: [{\n        ticks: {\n          beginAtZero: true\n        }\n      }]\n    }\n  }\n});\n\n//# sourceURL=webpack:///./src/elements.js?");
+
+/***/ }),
+
 /***/ "./src/expenseChart.js":
 /*!*****************************!*\
   !*** ./src/expenseChart.js ***!
   \*****************************/
-/*! exports provided: expensesChart, updateChart, resetChart */
+/*! exports provided: updateChart, resetChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"expensesChart\", function() { return expensesChart; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"updateChart\", function() { return updateChart; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"resetChart\", function() { return resetChart; });\n/* harmony import */ var _indexedDb__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./indexedDb */ \"./src/indexedDb.js\");\nvar Chart = __webpack_require__(/*! chart.js */ \"./node_modules/chart.js/dist/Chart.js\");\n\n\nvar ctx = document.getElementById(\"myChart\").getContext(\"2d\");\nvar expensesChart = new Chart(ctx, {\n  type: \"bar\",\n  data: {\n    labels: [],\n    datasets: [{\n      label: \"Expense cost in $\",\n      data: [],\n      backgroundColor: [\"rgba(255, 99, 132, 0.2)\", \"rgba(54, 162, 235, 0.2)\", \"rgba(255, 206, 86, 0.2)\", \"rgba(75, 192, 192, 0.2)\", \"rgba(153, 102, 255, 0.2)\", \"rgba(255, 159, 64, 0.2)\"],\n      borderColor: [\"rgba(255, 99, 132, 1)\", \"rgba(54, 162, 235, 1)\", \"rgba(255, 206, 86, 1)\", \"rgba(75, 192, 192, 1)\", \"rgba(153, 102, 255, 1)\", \"rgba(255, 159, 64, 1)\"],\n      borderWidth: 1\n    }]\n  },\n  options: {\n    title: {\n      text: \"Expenses Chart\"\n    },\n    scales: {\n      yAxes: [{\n        ticks: {\n          beginAtZero: true\n        }\n      }]\n    }\n  }\n});\nfunction updateChart(expenseChart, name, price) {\n  expenseChart.data.labels.push(name);\n  expenseChart.data.datasets.forEach(function (dataset) {\n    dataset.data.push(price);\n  });\n  expenseChart.update();\n}\nfunction resetChart(expenseChart) {\n  expenseChart.data.labels = [];\n  expenseChart.data.datasets.forEach(function (dataset) {\n    dataset.data = [];\n  });\n  expenseChart.update();\n}\nObject(_indexedDb__WEBPACK_IMPORTED_MODULE_0__[\"useIndexedDb\"])(\"expense\", \"expenseStore\", \"get\").then(function (results) {\n  results.forEach(function (expense) {\n    updateChart(expensesChart, expense.name, expense.value);\n  });\n});\n\n//# sourceURL=webpack:///./src/expenseChart.js?");
-
-/***/ }),
-
-/***/ "./src/indexedDb.js":
-/*!**************************!*\
-  !*** ./src/indexedDb.js ***!
-  \**************************/
-/*! exports provided: useIndexedDb */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"useIndexedDb\", function() { return useIndexedDb; });\nfunction useIndexedDb(databaseName, storeName, method, object) {\n  return new Promise(function (resolve, reject) {\n    var request = window.indexedDB.open(databaseName, 1);\n    var db, tx, store;\n\n    request.onupgradeneeded = function (e) {\n      var db = request.result;\n      db.createObjectStore(storeName, {\n        keyPath: \"_id\"\n      });\n    };\n\n    request.onerror = function (e) {\n      console.log(\"There was an error\");\n    };\n\n    request.onsuccess = function (e) {\n      db = request.result;\n      tx = db.transaction(storeName, \"readwrite\");\n      store = tx.objectStore(storeName);\n\n      db.onerror = function (e) {\n        console.log(\"error\");\n      };\n\n      if (method === \"put\") {\n        store.put(object);\n      }\n\n      if (method === \"clear\") {\n        store.clear();\n      }\n\n      if (method === \"get\") {\n        var all = store.getAll();\n\n        all.onsuccess = function () {\n          resolve(all.result);\n        };\n      }\n\n      tx.oncomplete = function () {\n        db.close();\n      };\n    };\n  });\n}\n\n//# sourceURL=webpack:///./src/indexedDb.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"updateChart\", function() { return updateChart; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"resetChart\", function() { return resetChart; });\nfunction updateChart(expenseChart, name, price) {\n  expenseChart.data.labels.push(name);\n  expenseChart.data.datasets.forEach(function (dataset) {\n    dataset.data.push(price);\n  });\n  expenseChart.update();\n}\nfunction resetChart(expenseChart) {\n  expenseChart.data.labels = [];\n  expenseChart.data.datasets.forEach(function (dataset) {\n    dataset.data = [];\n  });\n  expenseChart.update();\n}\n\n//# sourceURL=webpack:///./src/expenseChart.js?");
 
 /***/ })
 
