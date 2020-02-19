@@ -1,12 +1,6 @@
 import { subtract } from "./calculations";
-import { balanceEl, expenseEl, expensesListEl, expensesChart, priceEl, submitBtn, resetBtn } from "./elements";
-import { updateChart, resetChart } from "./expenseChart";
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
- 
-if ('serviceWorker' in navigator) {
-  const registration = runtime.register();
-}
-
+import { balanceEl, expenseEl, expensesListEl, priceEl, submitBtn, resetBtn } from "./elements";
+import { useIndexedDb } from "./indexedDb";
 
 function addToList(name, price) {
   expensesListEl.innerHTML += `<li class="list-group-item">Name: ${name}
@@ -18,7 +12,11 @@ function submit(e) {
   const total = subtract(Number(balanceEl.innerText), priceEl.value);
   balanceEl.innerText = total;
   addToList(expenseEl.value, priceEl.value);
-  updateChart(expensesChart, expenseEl.value, priceEl.value);
+  useIndexedDb("expense", "expenseStore", "put", {
+    _id: expenseEl.value,
+    name: expenseEl.value,
+    value: priceEl.value
+  });
 }
 
 function reset(e) {
@@ -26,8 +24,14 @@ function reset(e) {
   const total = 2000;
   balanceEl.innerText = total;
   expensesListEl.innerHTML = "";
-  resetChart(expensesChart);
+  useIndexedDb("expense", "expensesStore", "clear");
 }
 
 submitBtn.onclick = submit;
 resetBtn.onclick = reset;
+
+useIndexedDb("expense", "expenseStore", "get").then(results => {
+  results.forEach(expense => {
+    addToList(expense.name, expense.value);
+  });
+});
