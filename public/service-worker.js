@@ -1,8 +1,9 @@
 const FILES_TO_CACHE = [
   "/",
-  "/public/index.html",
-  "/dist/bundle.js",
-  "/assets/images/budget_25363.ico"
+  "/dist/db.bundle.js",
+  "/dist/index.bundle.js",
+  "/index.html",
+  "/style.css"
 ];
 
 const CACHE_NAME = "static-cache-v2";
@@ -45,7 +46,6 @@ self.addEventListener("fetch", function(evt) {
       caches.open(DATA_CACHE_NAME).then(cache => {
         return fetch(evt.request)
           .then(response => {
-            // If the response was good, clone it and store it in the cache.
             if (response.status === 200) {
               cache.put(evt.request.url, response.clone());
             }
@@ -53,7 +53,6 @@ self.addEventListener("fetch", function(evt) {
             return response;
           })
           .catch(err => {
-            // Network request failed, try to get it from the cache.
             return cache.match(evt.request);
           });
       }).catch(err => console.log(err))
